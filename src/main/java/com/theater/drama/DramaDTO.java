@@ -8,7 +8,14 @@ public class DramaDTO {
     private String place;
     private int price;
     private int buy_hit;
+    private int file_num;
     
+	public int getFile_num() {
+		return file_num;
+	}
+	public void setFile_num(int file_num) {
+		this.file_num = file_num;
+	}
 	public int getDrama_num() {
 		return drama_num;
 	}
