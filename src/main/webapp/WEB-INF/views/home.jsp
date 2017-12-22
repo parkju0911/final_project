@@ -11,5 +11,14 @@
 </h1>
 
 <P>  The time on the server is ${serverTime}. </P>
+
+<c:if test="${member eq null}">
+	<a href="./member/memberJoin">Member Join</a>
+	<a href="./member/memberLogin">Member Login</a>
+</c:if>
+
+<c:if test="${member ne null}">
+	<a href="./member/memberLogout">Member Logout</a>
+</c:if>
 </body>
 </html>

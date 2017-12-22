@@ -7,7 +7,7 @@ public class PointDTO {
 	private String id;
     private int point_num;
     private String history;
-    private Integer point;
+    private int point;
     private Date reg_date;
     
 	public String getId() {
@@ -28,10 +28,10 @@ public class PointDTO {
 	public void setHistory(String history) {
 		this.history = history;
 	}
-	public Integer getPoint() {
+	public int getPoint() {
 		return point;
 	}
-	public void setPoint(Integer point) {
+	public void setPoint(int point) {
 		this.point = point;
 	}
 	public Date getReg_date() {
