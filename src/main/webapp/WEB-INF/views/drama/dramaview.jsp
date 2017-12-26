@@ -47,7 +47,6 @@
 				<option class ="select_date">날짜 선택</option>
 				<c:forEach items="${list}" var="dto">
 				
-			
 				 <fmt:parseDate value='${dto.drama_date}'  var='dto_date'  pattern="yyyy-MM-dd"  scope="page"/>
 				<option><fmt:formatDate value="${dto_date}" pattern="yyyy-MM-dd"/>   </option>
 				 

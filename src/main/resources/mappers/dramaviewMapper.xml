@@ -6,7 +6,7 @@
   <resultMap type="DramaDTO" id="dramaDTO"></resultMap>
   <resultMap type="DramaListDTO" id="dramalistDTO"></resultMap>
   <resultMap type="CompanyDTO" id="companyDTO"></resultMap>
-  
+  <resultMap type="ReviewDTO" id="reviewDTO"></resultMap>
   <select id="selectOne" parameterType="int" resultMap="dramaDTO">
   	select * from drama where drama_num=#{drama_num}
   
@@ -21,6 +21,9 @@
   	select (row_num * col_num) from company_info where company_num=#{drama_num}
   	</select>
   
+  <select id="selectList_review" parameterType="com.theater.util.RowNum" resultMap="reviewDTO">
+  
+  </select>
   
   
   
