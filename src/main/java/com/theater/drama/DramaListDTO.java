@@ -2,10 +2,17 @@ package com.theater.drama;
 
 public class DramaListDTO {
 	
+	private int date_num;
 	private int drama_num;
     private String drama_date;
     private String drama_time;
     
+	public int getDate_num() {
+		return date_num;
+	}
+	public void setDate_num(int date_num) {
+		this.date_num = date_num;
+	}
 	public int getDrama_num() {
 		return drama_num;
 	}
