@@ -3,9 +3,10 @@ package com.theater.file;
 public class FileDTO {
 	
 	private int file_num;
-    private int num;
-    private String fileName;
-    private String oriName;
+	private String file_name;
+	private String file_route;
+    /*private int num;
+    private String ori_name;*/
     
 	public int getFile_num() {
 		return file_num;
@@ -13,22 +14,16 @@ public class FileDTO {
 	public void setFile_num(int file_num) {
 		this.file_num = file_num;
 	}
-	public int getNum() {
-		return num;
+	public String getFile_name() {
+		return file_name;
 	}
-	public void setNum(int num) {
-		this.num = num;
+	public void setFile_name(String file_name) {
+		this.file_name = file_name;
 	}
-	public String getFileName() {
-		return fileName;
+	public String getFile_route() {
+		return file_route;
 	}
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
-	}
-	public String getOriName() {
-		return oriName;
-	}
-	public void setOriName(String oriName) {
-		this.oriName = oriName;
+	public void setFile_route(String file_route) {
+		this.file_route = file_route;
 	}
 }

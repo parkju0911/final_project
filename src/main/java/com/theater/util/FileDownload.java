@@ -19,12 +19,13 @@ public class FileDownload extends AbstractView {
 
 		File file = (File)model.get("down");
 		response.setCharacterEncoding("UTF-8");
-		response.setContentLength((int)file.length());   //파일의 크기
-		String fileName = (String)model.get("oriName");
-		//파일명을 UTF-8로 인코딩
-		fileName = URLEncoder.encode(fileName, "UTF-8");
+		response.setContentLength((int)file.length());   //�뙆�씪�쓽 �겕湲�
+		//String filePath	= (String)model.get("file_route");
+		String file_name = (String)model.get("file_name");
+		//�뙆�씪紐낆쓣 UTF-8濡� �씤肄붾뵫
+		file_name = URLEncoder.encode(file_name, "UTF-8");
 
-		response.setHeader("Content-Disposition", "attachment;filename=\""+fileName+"\"");
+		response.setHeader("Content-Disposition", "attachment;file_name=\""+file_name+"\"");
 		response.setHeader("content-Transfer-Encoding", "binary");
 
 		OutputStream out = response.getOutputStream();
