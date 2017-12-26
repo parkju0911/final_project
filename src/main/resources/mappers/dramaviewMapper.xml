@@ -17,8 +17,8 @@
   	
   	</select>
   	
-  	<select id="ticket_sell" parameterType="int" resultMap="companyDTO">
-  		select * from Company_info where company_num=#{company_num}
+  	<select id="ticket_sell" parameterType="int" resultType="int">
+  	select (row_num * col_num) from company_info where company_num=#{drama_num}
   	</select>
   
   

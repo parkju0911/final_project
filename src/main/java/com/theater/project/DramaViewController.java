@@ -5,7 +5,6 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -13,7 +12,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.theater.drama.DramaDTO;
 import com.theater.drama.DramaListDTO;
 import com.theater.drama.DramaviewService;
-import com.theater.member.CompanyDTO;
 
 @Controller
 @RequestMapping(value="drama/*")
@@ -24,12 +22,17 @@ public class DramaViewController {
 	
 	
 	@RequestMapping(value="dramaview")
-	public ModelAndView selectOne(int drama_num ,ModelAndView mv, RedirectAttributes rd)throws Exception{
+	public ModelAndView selectOne(int drama_num ,  ModelAndView mv, RedirectAttributes rd)throws Exception{
 		DramaDTO dramaDTO = null;
 		dramaDTO = dramaviewService.selectOne(drama_num);
+		List<DramaListDTO> ar = dramaviewService.selectList(drama_num);
+		int ticket = dramaviewService.ticket_sell(drama_num);
 		
 		if(dramaDTO !=null){
 			mv.addObject("view", dramaDTO);
+			mv.addObject("list", ar);
+			mv.addObject("list2", ar);
+			mv.addObject("ticket", ticket);
 			mv.setViewName("drama/dramaview");
 			
 		}else{
@@ -54,13 +57,13 @@ public class DramaViewController {
 		return model;
 		
 	}
-	@RequestMapping(value="CompanyDTO")
-	public ModelAndView ticket_sell(int company_num , ModelAndView mv , RedirectAttributes rd)throws Exception{
+	/*@RequestMapping(value="CompanyDTO")
+	public ModelAndView ticket_sell(int drama_num , ModelAndView mv , RedirectAttributes rd)throws Exception{
 		CompanyDTO companyDTO = null;
-		companyDTO = dramaviewService.ticket_sell(company_num);
+		companyDTO = dramaviewService.ticket_sell(drama_num);
 		
 		if(companyDTO !=null){
-			mv.addObject("tickey", companyDTO);
+			mv.addObject("ticket", companyDTO);
 			mv.setViewName("drama/dramaview");
 			
 		}else{
@@ -70,5 +73,5 @@ public class DramaViewController {
 		
 		
 		return mv;
-	}
+	}*/
 }

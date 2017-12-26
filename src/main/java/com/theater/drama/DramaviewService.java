@@ -6,8 +6,6 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
-import com.theater.member.CompanyDTO;
-
 @Service
 public class DramaviewService {
 
@@ -28,11 +26,11 @@ public class DramaviewService {
 		
 		return ar;
 	}
-	public CompanyDTO ticket_sell(int company_num)throws Exception{
+	public int ticket_sell(int drama_num)throws Exception{
 		
-		CompanyDTO companyDTO = dramaDAO.ticket_sell(company_num);
+		int ticket = dramaDAO.ticket_sell(drama_num);
 		
-		return companyDTO;
+		return ticket;
 	}
 }
 

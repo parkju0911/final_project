@@ -7,8 +7,6 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
-import com.theater.member.CompanyDTO;
-
 
 @Repository
 public class DramaDAO {
@@ -26,7 +24,7 @@ public class DramaDAO {
 		
 		return sqlSession.selectList(NAMESPACE+"selectList", drama_num);
 	}
-	public CompanyDTO ticket_sell(int company_num)throws Exception{
-		return sqlSession.selectOne(NAMESPACE+"ticket_sell", company_num);
+	public int ticket_sell(int drama_num)throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"ticket_sell", drama_num);
 	}
 }

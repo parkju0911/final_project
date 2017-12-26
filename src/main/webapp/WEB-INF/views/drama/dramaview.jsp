@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -39,37 +40,45 @@
 			${view.price}원
 			</div>
 			</div>	
-			<form action="" method="post"> 
-				
+			<form action="좌석 선택 페이지로" method="post"> 
+				<input type="hidden" value="${view.price}">  
 				<select id="drama_date">
 				<optgroup label="날짜 선택">
 				<option class ="select_date">날짜 선택</option>
 				<c:forEach items="${list}" var="dto">
-				<option>"${list}"</option>
-				<option>"${dto.drama_time }"</option>
-				<option>"${list.drama_time }"</option>
 				
+			
+				 <fmt:parseDate value='${dto.drama_date}'  var='dto_date'  pattern="yyyy-MM-dd"  scope="page"/>
+				<option><fmt:formatDate value="${dto_date}" pattern="yyyy-MM-dd"/>   </option>
+				 
 				</c:forEach>
 			
 				</optgroup>
 				</select>
 						
-			<select id="drama_time">
+				<select id="drama_time">
+				<optgroup label="시간 선택">
 			
-			<optgroup label="시간 선택">
+				<option id="select_time">시간 선택</option>
+				<c:forEach items="${list2}" var="dto2">
+				<option>${dto2.drama_time }</option>
+				
+				</c:forEach>
+				</optgroup>
+				</select>
+				
+			<select id="drama_ticket">
+			<optgroup label="매수설정">
+			<option id="select_ticket">매수 설정</option>
+				<c:forEach begin="1" end="${ticket}" var="i">
+					<option>${i }</option>
+				</c:forEach>
+ 		<%-- <c:forEach items="${ticket}" var="ticket" >
+				<option>${ticket}</option>
+				<option>(${ticket.row_num}*${ticket.col_num })-(${ticket.total}-1)</option>
+			</c:forEach> --%>
 			
-			<option id="select_time">시간 선택</option>
-			
-			<option></option>
-			<option></option>
-			<option></option>
-			
-			</select>
-			
-			<input type="text" value="" , placeholder="매수설정" id="ticket_sell"> 
-			
-		
-			
+ 		</optgroup>
 			</select>
 			
 			<button id="ticket_buy">예매하기</button>
