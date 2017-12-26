@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="dramaviewMapper">
+  <resultMap type="DramaDTO" id="dramaDTO"></resultMap>
+  <resultMap type="DramaListDTO" id="dramalistDTO"></resultMap>
+  <resultMap type="CompanyDTO" id="companyDTO"></resultMap>
+  
+  <select id="selectOne" parameterType="int" resultMap="dramaDTO">
+  	select * from drama where drama_num=#{drama_num}
+  
+  </select>
+  	
+  	<select id="selectList" parameterType="com.theater.util.RowNum" resultMap="dramalistDTO">
+  	select * from DATE_LIST  where drama_num=#{drama_num} order by drama_time asc
+  	
+  	</select>
+  	
+  	<select id="ticket_sell" parameterType="int" resultType="int">
+  	select (row_num * col_num) from company_info where company_num=#{drama_num}
+  	</select>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </mapper>
