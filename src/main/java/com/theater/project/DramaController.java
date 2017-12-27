@@ -34,8 +34,8 @@ public class DramaController {
 	public ModelAndView selectList(ListData listData) throws Exception {
 		ModelAndView mv = null;
 		mv = dramaService.selectList(listData);
-		mv.setViewName("drama/dramaList");
-		System.out.println(11111111);	
+		mv.setViewName("drama/list");
+		
 		return mv;
 	}
 	/*
