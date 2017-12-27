@@ -35,7 +35,7 @@ public class DramaController {
 		ModelAndView mv = null;
 		mv = dramaService.selectList(listData);
 		mv.setViewName("drama/dramaList");
-			
+		System.out.println(11111111);	
 		return mv;
 	}
 	/*
