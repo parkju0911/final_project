@@ -5,8 +5,10 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.MultipartFile;
 
+@Repository
 public class FileSaver {
 	
 	public String fileSave(MultipartFile multipartFile, HttpSession session, String path) throws Exception{

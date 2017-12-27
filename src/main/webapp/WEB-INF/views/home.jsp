@@ -16,5 +16,7 @@
 </h1>
 <a href="drama/dramaview?drama_num=1">drama</a>
 <P>  The time on the server is ${serverTime}. </P>
+<a href="drama/dramaList">Drama List</a>
+<a href="drama/test">test</a>
 </body>
 </html>

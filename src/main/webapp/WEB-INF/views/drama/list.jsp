@@ -6,7 +6,27 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link href="../css/review/review.css" rel="stylesheet">
+<link href="../resources/css/dramaList.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+	$(function() {
+		var message = '${message}';
+		if(message != '') {
+			alert(message);
+		}
+		
+		$(".list").click(function() {
+			var cur = $(this).attr("title");
+			var s = '${pager.search}';
+			var t = '${pager.kind}';
+			document.frm.curPage.value=cur;
+			document.frm.search.value=s;
+			document.frm.kind.value=t;
+			document.frm.submit();
+		});
+	});
+</script>
 <title>Insert title here</title>
 </head>
 <body>
@@ -21,7 +41,7 @@
 		<div class="tit-board">
 			<p class="img"></p>
 			<h2>
-				<font color="#555555">${fn:toUpperCase(requestScope.board)}</font>
+				<font color="#555555"></font>
 			</h2>
 			
 		</div>
@@ -30,7 +50,8 @@
 	<div class="container review">
 		<div id="review-feed-list-wrap">
 			<div class="row unpa-card-row row-flex-height-md">
-				<c:forEach items="${requestScope.list}" var="dto">
+			<c:forEach items="${list}" var="dto">
+				<%-- <c:forEach items="${requestScope.list}" var="dto"> --%>
 					<div class="col-md-4 unpa-ad-responsive-parent">
 
 						<div class="unpa-card unpa-card-box-shadow unpa-review">
@@ -44,27 +65,27 @@
 												<div class="user-name unpa-tooltip" data-html="true"
 													data-toggle="tooltip" data-placement="bottom"
 													title="<i class='ion-person'></i> 267 <i class='ion-edit'></i> 40">
-													${dto.writer}</div>
+													${dto.drama_num}</div>
 												<div class="user-labels" style="">
-													<span class="skin-type false ">${dto.tone}</span>
+													<span class="skin-type false ">${dto.place}</span>
 												</div>
 											</div>
 										</div>
 									</div>
-									<div class="time">${dto.reg_date}</div>
+									<div class="time">${dto.file_num}</div>
 								</a>
 								<div class="unpa-feed-card-hover-actions">
 									<span class="unpa-share-this-button"><i
 										class="unpacon-share"></i></span>
 
-									<div class="number-of-images">
+								<!-- 	<div class="number-of-images">
 										<i class="glyphicon glyphicon-picture"></i> 6
-									</div>
+									</div> -->
 
 								</div>
 
 								<div class="main-image"
-									style="background-image:  url('../upload/${dto.fname}')">
+									style="background-image: url('../resources/image/drama_1.jpg')" >
 									<div class="content">
 										<a>${dto.contents}</a>
 									</div>
@@ -73,7 +94,7 @@
 									<div class="product-info">
 										<div class="left">
 											<div class="product-image"
-												style="background-image: url('${pageContext.request.contextPath}/image/review/unpa-product-default.png')"></div>
+												style="background-image: url(../resources/image/drama_1.jpg')"></div>
 										</div>
 
 
@@ -81,12 +102,12 @@
 											<div class="brand-name-and-rating">
 												<div class="brand-name">
 													<a
-														href="./${requestScope.board}View.${requestScope.board}?num=${dto.num}">${dto.title}</a>
+														href="">${dto.title}</a>
 												</div>
 											</div>
 											<div class="product-name">
 												<a
-													href="./${requestScope.board}View.${requestScope.board}?num=${dto.num}">${dto.pname}</a>
+													href="">${dto.price} 원</a>
 											</div>
 										</div>
 									</div>
@@ -110,43 +131,40 @@
 									</div> --%>
 
 									<div class="views">
-										<div style="display: inline; position: relative; top: 1px;">${dto.hit}
-											view</div>
+										<div style="display: inline; position: relative; top: 1px;">${dto.buy_hit} BUY</div>
 
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-				</c:forEach>
+			</c:forEach>
 			</div>
 		</div>
 	
 
 	<div class="text-center">
       <ul class="pagination">
-         <c:if test="${page.curBlock>1}">
-            <li><button class="go" id="${page.startNum-1}">[이전]</button></li>
-         </c:if>
-
-         <c:forEach begin="${page.startNum}" end="${page.lastNum}" var="i">
-            <li><a
-               href="./${requestScope.board}List.${requestScope.board}?curPage=${i}">${i}</a></li>
-         </c:forEach>
-
-         <c:if test="${page.curBlock < page.totalBlock}">
-            <li><a
-               href="./${requestScope.board}List.${requestScope.board}?curPage=${requestScope.page.lastNum+1}">[다음]</a></li>
-         </c:if>
+    
+			<c:if test="${pager.curBlock gt 1}">
+				<span class="list" title="${pager.startNum-1}">[이전]</span>
+			</c:if>
+			<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
+				<span class="list" title="${i}">${i}</span>
+			</c:forEach>
+			<c:if test="${pager.curBlock lt pager.totalBlock}">
+				<span class="list" title="${pager.lastNum+1}">[다음]</span>
+			</c:if>
+		
       </ul>
    </div>
-         <c:if test="${not empty member}">
+         <%-- <c:if test="${not empty member}"> --%>
       <div class="write-btn"
          style="float: right; width: 84px; height: 23px;     margin-top: 60px; border-radius: 123px; background-color: #a09d9dcc;">
-            <a href="./reviewWrite.review"
+            <a href="${board}Write"
                style="color: white; margin: auto; padding: 20px; font-weight: 600;">WRITE</a>
       </div>
-         </c:if>
+        <%--  </c:if> --%>
          </div>
 
 	<!-- footer 시작 -->

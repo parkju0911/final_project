@@ -1,8 +1,9 @@
 package com.theater.drama;
 
-public class DramaDTO {
+public class DramaDTO extends DramaFileDTO{
 	
 	private int drama_num;
+	private int company_num;
     private String title;
     private String contents;
     private String place;
