@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-
+import com.theater.file.FileDAO;
 import com.theater.file.FileDTO;
 import com.theater.notice.NoticeDTO;
 import com.theater.util.FileSaver;
@@ -26,10 +26,10 @@ public class DramaService {
 
 	@Inject
 	private DramaDAO dramaDAO;
-	/*@Inject
-	private FileSaver fileSaver;*/
-/*	@Inject
-	private FileDAO fileDAO;*/
+	@Inject
+	private FileSaver fileSaver;
+	@Inject
+	private FileDAO fileDAO;
 	
 	public ModelAndView selectList(ListData listData) throws Exception {
 		ModelAndView mv = new ModelAndView();
@@ -50,30 +50,31 @@ public class DramaService {
 		//((NoticeDTO)boardDTO).setFileNames(fileDAO.selectList(num));
 		return boardDTO;
 	}
+	*/
 
-	@Override
-	public int insert(BoardDTO boardDTO, HttpSession session) throws Exception {
-		int result = noticeDAO.insert(boardDTO);
+	
+	public int insert(DramaDTO dramaDTO, HttpSession session) throws Exception {
+		int result = dramaDAO.insert(dramaDTO);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("num", 462);
-		map.put("title", boardDTO.getTitle());
-		map.put("contents", boardDTO.getContents());
+		map.put("drama_num", dramaDTO.getDrama_num());
+		map.put("title", dramaDTO.getTitle());
+		map.put("contents", dramaDTO.getContents());
 		
-		result = noticeDAO.insertMemo(map);
+	
 		
-		MultipartFile[] files = ((NoticeDTO)boardDTO).getFiles();
+		MultipartFile[] files =((DramaDTO)dramaDTO).getFiles();
 		
-		System.out.println("NUM: "+ boardDTO.getNum());
+		System.out.println("NUM: "+ dramaDTO.getDrama_num());
 		
 		//저장 1. 저장경로 - realpath
 		//List<FileDTO> names = new ArrayList<FileDTO>();
 		for (MultipartFile multipartFile : files) {
 			String name = fileSaver.fileSave(multipartFile, session, "upload");
 			FileDTO fileDTO = new FileDTO();
-			fileDTO.setNum(boardDTO.getNum()); // 먼저 noticeDAO.insert(boardDTO); 했긴 때문에 가능
-			fileDTO.setFilename(name);
-			fileDTO.setOriname(multipartFile.getOriginalFilename());
+			fileDTO.setNum(dramaDTO.getDrama_num()); // 먼저 noticeDAO.insert(boardDTO); 했긴 때문에 가능
+			fileDTO.setFileName(name);
+			fileDTO.setOriName(multipartFile.getOriginalFilename());
 			//names.add(fileDTO);
 			fileDAO.insert(fileDTO);
 		}
@@ -82,7 +83,7 @@ public class DramaService {
 		return result;
 	}
 
-	@Override
+	/*@Override
 	public int update(BoardDTO boardDTO) throws Exception {
 		return noticeDAO.update(boardDTO);
 	}
@@ -90,6 +91,6 @@ public class DramaService {
 	@Override
 	public int delete(int num) throws Exception {
 		return noticeDAO.delete(num);
-	}
-*/
+	}*/
+
 }

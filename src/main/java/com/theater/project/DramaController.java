@@ -38,8 +38,8 @@ public class DramaController {
 			
 		return mv;
 	}
-	
-	/*//selectOne
+	/*
+	//selectOne
 	@RequestMapping(value="dramaView")
 	public String selectOne(Model model, int num) throws Exception {
 		
@@ -50,33 +50,33 @@ public class DramaController {
 			
 		return "board/boardView";
 	}
-	
+	*/
 	
 	//insert -> form 이동
-	@RequestMapping(value="noticeWrite", method=RequestMethod.GET)
+	@RequestMapping(value="dramaWrite", method=RequestMethod.GET)
 	public String insert(Model model) {
-		model.addAttribute("board", "notice");
+		model.addAttribute("board", "drama");
 		
-		return "board/boardWrite";
+		return "drama/dramaWrite";
 	}
 	
 	//insert -> DB 처리
-	@RequestMapping(value="noticeWrite", method=RequestMethod.POST)
-	public String insert(NoticeDTO noticeDTO, Model model, HttpSession session) throws Exception {
+	@RequestMapping(value="dramaWrite", method=RequestMethod.POST)
+	public String insert(DramaDTO dramaDTO, Model model, HttpSession session) throws Exception {
 		int result = 0;
-		result = noticeService.insert(noticeDTO, session);
+		result = dramaService.insert(dramaDTO, session);
 		
 		String message = "Fail";
 		if(result > 0) {
 			message = "Success";
 		}
 		model.addAttribute("message", message);
-		model.addAttribute("path", "../notice/noticeList");
+		model.addAttribute("path", "../drama/dramaList");
 		
 		return "common/message";
 	}
 	
-	
+	/*
 	//update -> form 이동
 	@RequestMapping(value="noticeUpdate", method=RequestMethod.GET)
 	public String update(int num, Model model) throws Exception {

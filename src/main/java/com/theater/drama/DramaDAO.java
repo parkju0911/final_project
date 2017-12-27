@@ -41,20 +41,20 @@ public class DramaDAO  {
 	public BoardDTO selectOne(int num) throws Exception {
 		return sqlSession.selectOne(namespace+"selectOne", num); // 파라미터 갯수는 한개!
 	}
+	*/
 
-	public int insertMemo(Map<String, Object> map) throws Exception {
-		return sqlSession.insert(namespace+"memoInsert", map);
-	}
+
 	
-	@Override
-	public int insert(BoardDTO boardDTO) throws Exception {
-		System.out.println("Before: "+boardDTO.getNum());
-		int result = sqlSession.insert(namespace+"insert", boardDTO);
-		System.out.println("After: "+boardDTO.getNum());
+	
+	
+	public int insert(DramaDTO dramaDTO) throws Exception {
+		System.out.println("Before: "+dramaDTO.getDrama_num());
+		int result = sqlSession.insert(namespace+"insert", dramaDTO);
+		System.out.println("After: "+dramaDTO.getDrama_num());
 		return result;
 	}
 
-	@Override
+	/*@Override
 	public int update(BoardDTO boardDTO) throws Exception {
 		return sqlSession.update(namespace+ "update", boardDTO);
 	}
@@ -75,6 +75,6 @@ public class DramaDAO  {
 	public int getNum() throws Exception {
 		// TODO Auto-generated method stub
 		return 0;
-	}
-*/
+	}*/
+
 }

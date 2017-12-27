@@ -6,11 +6,27 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link href="./css/dramaList.css" rel="stylesheet">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link href="../resources/css/dramaList.css" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+<script type="text/javascript">
+	$(function() {
+		var message = '${message}';
+		if(message != '') {
+			alert(message);
+		}
+		
+		$(".list").click(function() {
+			var cur = $(this).attr("title");
+			var s = '${pager.search}';
+			var t = '${pager.kind}';
+			document.frm.curPage.value=cur;
+			document.frm.search.value=s;
+			document.frm.kind.value=t;
+			document.frm.submit();
+		});
+	});
+</script>
 <title>Insert title here</title>
 </head>
 <body>
@@ -51,12 +67,12 @@
 													title="<i class='ion-person'></i> 267 <i class='ion-edit'></i> 40">
 													${dto.drama_num}</div>
 												<div class="user-labels" style="">
-													<span class="skin-type false ">${dto.title}</span>
+													<span class="skin-type false ">${dto.place}</span>
 												</div>
 											</div>
 										</div>
 									</div>
-									<div class="time">${dto.place}</div>
+									<div class="time">${dto.file_num}</div>
 								</a>
 								<div class="unpa-feed-card-hover-actions">
 									<span class="unpa-share-this-button"><i
@@ -69,7 +85,7 @@
 								</div>
 
 								<div class="main-image"
-									<%-- style="background-image:  url('../upload/${dto.fname}')" --%>>
+									style="background-image: url('../resources/image/drama_1.jpg')" >
 									<div class="content">
 										<a>${dto.contents}</a>
 									</div>
@@ -78,7 +94,7 @@
 									<div class="product-info">
 										<div class="left">
 											<div class="product-image"
-												<%-- style="background-image: url('${pageContext.request.contextPath}/image/review/unpa-product-default.png')" --%>></div>
+												style="background-image: url(../resources/image/drama_1.jpg')"></div>
 										</div>
 
 
@@ -86,12 +102,12 @@
 											<div class="brand-name-and-rating">
 												<div class="brand-name">
 													<a
-														href="">${dto.price}</a>
+														href="">${dto.title}</a>
 												</div>
 											</div>
 											<div class="product-name">
 												<a
-													href="">${dto.file_num}</a>
+													href="">${dto.price} 원</a>
 											</div>
 										</div>
 									</div>
@@ -115,7 +131,7 @@
 									</div> --%>
 
 									<div class="views">
-										<div style="display: inline; position: relative; top: 1px;">${dto.buy_hit}</div>
+										<div style="display: inline; position: relative; top: 1px;">${dto.buy_hit} BUY</div>
 
 									</div>
 								</div>
@@ -145,7 +161,7 @@
          <%-- <c:if test="${not empty member}"> --%>
       <div class="write-btn"
          style="float: right; width: 84px; height: 23px;     margin-top: 60px; border-radius: 123px; background-color: #a09d9dcc;">
-            <a href=""
+            <a href="${board}Write"
                style="color: white; margin: auto; padding: 20px; font-weight: 600;">WRITE</a>
       </div>
         <%--  </c:if> --%>
