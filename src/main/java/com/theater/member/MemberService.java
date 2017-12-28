@@ -25,4 +25,8 @@ public class MemberService {
 	public MemberDTO login(MemberDTO memberDTO) throws Exception {
 		return memberDAO.login(memberDTO);
 	}
+	
+	public MemberDTO checkId(String id) throws Exception {
+		return memberDAO.checkId(id);
+	}
 }

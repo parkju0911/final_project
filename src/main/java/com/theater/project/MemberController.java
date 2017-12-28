@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.theater.member.CompanyDTO;
@@ -20,33 +21,29 @@ public class MemberController {
 	@Inject
 	private MemberService memberService;
 	
+	@RequestMapping(value="memberJoin1", method=RequestMethod.GET)
+	public String memberJoin1(){
+		return "member/memberJoin1";
+	}
+	
+	@RequestMapping(value="memberJoin2", method=RequestMethod.GET)
+	public String memberJoin2(){
+		return "member/memberJoin2";
+	}
+	
 	@RequestMapping(value="memberJoin", method=RequestMethod.GET)
 	public String memberJoin(){
 		return "member/memberJoin";
 	}
-	
-	/*@RequestMapping(value="memberJoin", method=RequestMethod.POST)
-	public String memberJoin(RedirectAttributes attributes, MemberDTO memberDTO) throws Exception {
-		int result = memberService.memberJoin(memberDTO);
-		System.out.println(memberDTO.getKind());
-		String message="FAIL";
-		if(result>0){
-			message="SUCCESS";
-		}
-		attributes.addFlashAttribute("message", message);
-		return "redirect:/";
-	}*/
 	
 	@RequestMapping(value="/user/memberJoin", method=RequestMethod.POST)
 	public String memberJoinUser(RedirectAttributes attributes, MemberDTO memberDTO, UserDTO userDTO) throws Exception {
 		System.out.println(userDTO.getBirth());
 		int result = memberService.memberJoin(memberDTO);
 		result = memberService.userJoin(userDTO);
-		System.out.println(memberDTO.getId());
-		System.out.println(memberDTO.getKind());
-		String message="FAIL";
+		String message="회원가입 실패";
 		if(result>0){
-			message="SUCCESS";
+			message="회원가입 성공";
 		}
 		attributes.addFlashAttribute("message", message);
 		return "redirect:/";
@@ -56,11 +53,9 @@ public class MemberController {
 	public String memberJoinCompany(RedirectAttributes attributes, MemberDTO memberDTO, CompanyDTO companyDTO) throws Exception {
 		int result = memberService.memberJoin(memberDTO);
 		result = memberService.companyJoin(companyDTO);
-		System.out.println(memberDTO.getId());
-		System.out.println(memberDTO.getKind());
-		String message="FAIL";
+		String message="회원가입 실패";
 		if(result>0){
-			message="SUCCESS";
+			message="회원가입 성공";
 		}
 		attributes.addFlashAttribute("message", message);
 		return "redirect:/";
@@ -87,5 +82,31 @@ public class MemberController {
 	public String memberLogout(HttpSession session){
 		session.invalidate();
 		return "redirect:/";
+	}
+	
+	@RequestMapping(value="checkId", method=RequestMethod.GET)
+	public ModelAndView checkId(ModelAndView modelAndView, String id){
+		//boolean result = false;
+		MemberDTO result = null;
+		try {
+			result = memberService.checkId(id);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(result==null){
+			modelAndView.addObject("message", "사용가능한 ID 입니다.");
+			modelAndView.setViewName("commons/result");
+		} else {
+			modelAndView.addObject("message", "중복된 ID 입니다.");
+		}
+		/*if(result==true) {
+			modelAndView.addObject("message", "사용가능한 ID 입니다.");
+			modelAndView.setViewName("member/memberJoin");
+		} else {
+			modelAndView.addObject("message", "중복된 ID 입니다.");
+		}*/
+		modelAndView.addObject("result", result);
+		return modelAndView;
 	}
 }
