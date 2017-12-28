@@ -2,101 +2,8 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<<<<<<< HEAD
   
-  <mapper namespace="fileMapper">
-  	<resultMap type="FileDTO" id="test">
-  		<id property="file_num" column="file_num" />
-  		<result property="num" column="n_num" />
-  		<result property="filename" column="file_name"/>
-  		<result property="oriname" column="ori_name"/>
-  	</resultMap>
-  	
-  	<resultMap type="com.theater.drama.DramaTestDTO" id="dramaTest">
-  		<id property="drama_num" column="drama_num"/>
-  		<result property="company_num" column="company_num"/>
-  		<result property="title" column="title"/>
-  		<result property="contents" column="contents"/>
-  		<result property="place" column="place"/>
-  		<result property="price" column="price"/>
-  		<result property="buy_hit" column="buy_hit"/>
-  		<result property="file_num" column="file_num"/>
-  		<association property="fileDTO" javaType="FileDTO" resultMap="fileResult">
-  			<id property="file_num" column="file_num"/>
-  			<result property="num" column="num"/>
-  			<result property="filename" column="filename"/>
-  			<result property="oriname" column="oriname"/>
-  		</association>
-  	</resultMap>
-  	
-  	<resultMap type="DramaDTO" id="dramaResult">
-  		<id property="drama_num" column="num"/>
-  		<result property="company_num" column="company_num"/>
-  		<result property="title" column="title"/>
-  		<result property="contents" column="contents"/>
-  		<result property="place" column="place"/>
-  		<result property="price" column="price"/>
-  		<result property="buy_hit" column="buy_hit"/>
-  		<result property="file_num" column="file_num"/>	
-  		<collection property="fileNames" javaType="ArrayList" ofType="FileDTO">
-  			<id property="file_num" column="file_num"/>
-  			<result property="num" column="num"/>
-  			<result property="filename" column="filename"/>
-  			<result property="oriname" column="oriname"/>
-  		</collection>
-  	</resultMap>
-  	
-  	<select id="selectTest3" resultMap="dramaResult">
-  		select drama.*, file_table.* 
-		from drama, file_table 
-		where drama.num=251 and drama.num=file_table.num
-  	</select>
-  		
-  	<select id="selectTest2" parameterType="int" resultMap="dramaTest">
-  		select drama.*, file_table.* 
-		from drama, file_table 
-		where drama.num=1 and drama.num=file_table.num
-  	</select>
-  
-  	<select id="selectTest" parameterType="int" resultMap="test">
-  		select fnum f_num, num n_num, filename file_name, oriname ori_name
-  		from file_table
-  		where num=#{num}
-  	</select>
-  
-  <!-- 다중 insert  -->
-  	<insert id="fileInsert" parameterType="java.util.List">
-  		insert All
-  		<foreach collection="list" item="item" index="index">
-  		into file_table values
-  			(
-  				file_num.nextval,
-  				#{item.num},
-  				#{item.fileName},
-  				#{item.oriName}
-  			)
-  		</foreach>
-  		select * from dual
-  	</insert>
-  	
-  	
-  	<insert id="insert" parameterType="FileDTO">
-  
-  		<selectKey keyProperty="num" resultType="int" order="BEFORE">
-  			select drama_num.nextval from dual
-  		</selectKey>
-  		insert into file_table 
-  		values
-  		(file_num.nextval, #{num}, #{fileName},#{oriName})
-  	</insert>
-
-  	
-  	<select id="selectList" parameterType="int" resultType="FileDTO">
-		select * from file_table where num=#{num}
-  	</select>
-  
-=======
-  <mapper namespace="fileMapper">
+  	<mapper namespace="fileMapper">
   	<resultMap type="FileDTO" id="test">
   		<id property="file_num" column="file_num"/>
   		<result property="file_name" column="file_name"/>
@@ -121,7 +28,24 @@
   			<result property="file_route" column="file_route"/>
   		</collection>
   	</resultMap>
-  	  	
+  	
+  
+  <!-- 다중 insert  -->
+  	<!-- <insert id="fileInsert" parameterType="java.util.List">
+  		insert All
+  		<foreach collection="list" item="item" index="index">
+  		into file_table values
+  			(
+  				file_num.nextval,
+  				#{item.num},
+  				#{item.fileName},
+  				#{item.oriName}
+  			)
+  		</foreach>
+  		select * from dual
+  	</insert> -->
+  	
+  	
   	<insert id="insert" parameterType="FileDTO">
   		<selectKey keyProperty="num" resultType="int" order="BEFORE">
   			select file_num.nextval from dual
@@ -132,6 +56,5 @@
   	<select id="selectList" parameterType="int" resultType="FileDTO">
   		select * from file_table where file_num=#{file_num}
   	</select>
-    
->>>>>>> notice
+  
   </mapper>
