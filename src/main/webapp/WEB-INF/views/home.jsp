@@ -15,6 +15,7 @@
 	Hello world!  
 </h1>
 <a href="drama/dramaview?drama_num=1">drama</a>
+<a href="review/reviewlist?drama_num=1">reviewlist</a>
 <P>  The time on the server is ${serverTime}. </P>
 </body>
 </html>
