@@ -75,21 +75,14 @@ public class DramaViewController {
 		
 		return model;
 	}
+	@RequestMapping(value="refundlist")
+	public String refundlist()throws Exception{
+		
+		return "drama/refundlist";
+	}
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-	/*@RequestMapping(value="CompanyDTO")
+/*	@RequestMapping(value="CompanyDTO")
 	public ModelAndView ticket_sell(int drama_num , ModelAndView mv , RedirectAttributes rd)throws Exception{
 		CompanyDTO companyDTO = null;
 		companyDTO = dramaviewService.ticket_sell(drama_num);
@@ -106,4 +99,4 @@ public class DramaViewController {
 		
 		return mv;
 
-}
+}*/

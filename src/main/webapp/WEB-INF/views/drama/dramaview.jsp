@@ -14,12 +14,23 @@
 <script type="text/javascript">
 
 	$(function() {
-	
-			$("#reviewlist").click(function() {
+			
+			$()	
+		
+			$(".reviewlist").click(function() {
 				$("#view_page").load("./reviewlist?drama_num="+${view.drama_num})
 			});
 		
+			$("#refund").click(function() {
+				$("#view_page").load("./refundlist")
+			});
+			$("#refund_1").click(function() {
+				$("#view_page").load("./refundlist")
+			});
 			
+			$("#info_default").click(function() {
+				location.reload();
+			})
 	});
 	
 	
@@ -142,7 +153,7 @@ A:VISITED { text-decoration: none;}
 			
 				</c:forEach>
 			</table>
-			<div id="afterview_total"><a href="#view_page" id="reviewlist">후기 전체보기></a></div>
+			<div id="afterview_total"><a href="#view_page" class="reviewlist">후기 전체보기></a></div>
 		</div>
 	
 		
@@ -150,18 +161,20 @@ A:VISITED { text-decoration: none;}
 		
 		
 		<ul class="info_bar">
-		<li id="info_1" class="selected"><div class="border_color"><a href="#default"  onclick="movefunction(); return false;"><span>안내</span></a></div></li>
-		<li id="after"><a href="#after" id="review_bar">후기(${total })</a></li>
-		<li id="QNA"><a href="#QNA">QnA</a></li>
-		<li id="reprice"><a href="#reprice">환불규정</a></li>
+		<li id="info_1" class="selected"><div class="border_color"><a href="#default"  id="info_default" onclick="movefunction(); return false;"><span id="border_color_1">안내</span></a></div></li>
+		<li id="after"><a href="#after" class="reviewlist">후기(${total })</a></li>
+		<li id="QNA"><a href="#QNA">Q&A</a></li>
+		<li id="reprice"><a href="#reprice" id="refund">환불규정</a></li>
 		</ul>
 		<div id="view_page">
 		
 		
 		<div id="warning">
-		예매 전 안내 및 주의사항을 꼭 확인하세요!
-
-		티켓에 따라 이용방법/환불규정이 상이합니다. 환불규정 바로가기 >
+		<div id="warning_tool">
+		<p>예매 전 안내 및 주의사항을 꼭 확인하세요!</p>
+	
+		<p>티켓에 따라 이용방법/환불규정이 상이합니다. <a href="##" id="refund_1">환불규정 바로가기</a></p>
+		</div>
 		</div>
 
 
